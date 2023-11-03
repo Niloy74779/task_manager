@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mx-5 px-5 text-center">
+    <h2>This my Complete Task page</h2>
+</div>
+
+{% for task in object_list  %}
+
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="row no-gutters">
+            <div class="col-2">
+                <img src="#" class="w-100">
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Name : </b>{{task.user.first_name}} {{profile.user.last_name}}</h5>
+                    <h6><b>Title : </b>({{task.title}})</h6>
+                    <p class="card-text">{{task.description}}</p>
+                    {% if user == task.user %}
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary mt-4">Edit Profile</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-2 d-flex justify-content-end align-items-center">
+                {% if user.is_staff %}
+                    <a href="{% url "task-delete" pk=task.id %}" class="m-2 btn btn-danger" type="button">Delete</a><br>
+                {% endif %}
+                <div>
+                    <a href="{% url "Incomplete_task" id=task.id %}" class="m-2 btn btn-secondary" type="button">InComplete</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endfor %}
+
+
+{% endblock body %}
+
